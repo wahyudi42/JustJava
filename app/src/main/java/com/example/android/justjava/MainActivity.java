@@ -57,13 +57,6 @@ public class MainActivity extends ActionBarActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.item_checkbox_2);
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
-        // Calculate the price
-        //int price = calculatePrice(hasWhippedCream, hasChocolate);
-
-        // Display the order summary on the screen
-        //String message = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
-        //displayMessage(message);
-
         String message = priceSummary;
 
         // Use an intent to launch an email app.
@@ -86,19 +79,8 @@ public class MainActivity extends ActionBarActivity {
      * */
 
     public int calculatePrice(){
-        //String price = "Total Rp " + (quantity * 3000) + "\nTerima Kasih!";
-        //displayMessage(price);
         int price;
-        if(getState()){
-                price = (quantity * 5) + 1;
-            if(getState_2()){
-                price = (quantity * 5) + 3;
-            }
-        } else if(getState_2()){
-                price = (quantity * 5) + 2;
-        } else{
-            price = (quantity * 5);
-        }
+        price = quantity * (5 + cekTopping());
         return price;
     }
 
@@ -174,6 +156,24 @@ public class MainActivity extends ActionBarActivity {
             displayQuantity(quantity);
             //displayPrice(quantity * 3000);
         }
+    }
+
+    /**
+     *  This method for check the boolean toopings
+     * */
+    public int cekTopping(){
+        int tambahan = 0;
+
+        if(getState()){
+            tambahan = 1;
+            if(getState_2()){
+                tambahan = 3;
+            }
+        } else if(getState_2()){
+            tambahan =  2;
+        }
+
+        return tambahan;
     }
 
     /**
